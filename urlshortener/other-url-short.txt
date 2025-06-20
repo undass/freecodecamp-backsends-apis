@@ -1,0 +1,74 @@
+async function shortenURL_() {
+   //get origin URL
+   let urlToShort = document.getElementById('url')
+
+   try {
+     // generate hash and map
+     let urlHash = await storeURL(urlToShort);
+
+    // construct short url
+    let shortdURL = window.location.origin + '/' + urlHash;
+
+    // display shortened URL
+    showShortdURL(shortdURL);
+   } catch(error) {
+      console.log(error);
+      alert('Error in shortening URL.');
+   }
+}
+/*
+ async function storeURL(url) {
+    //generate random hash
+    let hash = generateHash();
+    // 
+    let data = { original_url: url };
+    //Make API req to store data
+    let response = await fecth('/api/url' + '/' + hash, {
+      method: 'POST',
+      body: JSON.stringify(data)
+});
+    return hash;
+}
+*/
+/*
+  function generateHash() { //generate hash using MAth.random js method
+    let result = ''; //empty  variable to store
+    // store allowed characters
+    let characs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcedfghijklmnopqrstuvwxyz01234567>
+    let characLength = characs.length;
+    for (let i = 0; i < 5; i++) {
+       result += characs.charAt(Math.floor(Math.random() * characsLength));
+    }
+};
+*/
+
+
+async function storeURL(url) {
+    //generate random hash
+    let hash = generateHash();
+    // 
+    let data = { original_url: url };
+    //Make API req to store data
+    let response = await fecth('/api/url' + '/' + hash, {
+      method: 'POST',
+      body: JSON.stringify(data)
+});
+    return hash;
+}
+
+// shorteneing URL
+
+/* const shortenURL = async() => {
+  const Url = document.getElementById("url").value;
+  const response = await fetch('tinyurl.com/api-create.php?url=${encodeURICompo>
+  if (response.ok) {
+     const data = await response.txt();
+     document.getElementById('result').innerHTML =
+     'shortend URL: <a href="${data}" target="_blank">${data}</a>';
+  }
+  else {
+     document.getElementById('result').innerHTML = "Invalid URL"
+  }
+}
+*/
+
